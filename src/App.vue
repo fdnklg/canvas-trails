@@ -10,9 +10,9 @@
 
 	const conf = {
 		'width': 900,
-		'height': 600,
-		'pointsWidth': 6,
-		'pointsMargin': 4,
+		'height': 900,
+		'pointsWidth': 2,
+		'pointsMargin': 25,
 	}
 
 	export default {
@@ -29,7 +29,7 @@
 		},
 		randomData() {
 			let arr = [];
-			d3Range(5000).forEach((index) => {
+			d3Range(1000).forEach((index) => {
 				arr.push({
 					value: Math.random(),
 					index: index 
@@ -54,7 +54,7 @@
 			return points;
 		},
 		networks(points) {
-			const numNetworks = 10;
+			const numNetworks = 5;
 			const networkSize = 20;
 
 			let arr = [];

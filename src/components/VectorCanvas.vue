@@ -6,7 +6,9 @@
     import { 
         select as d3Select,
         timer as d3Timer,
-        easeCubic as d3EaseCubic
+        interval as d3Interval,
+        easeCubic as d3EaseCubic,
+        easeLinear as d3EaseLinear,
     } from 'd3';
     export default {
         name: 'VectorCanvas',
@@ -22,7 +24,7 @@
                 maxAge: 100,
                 frameRate: 30,
                 age: [],
-                duration: 3000,
+                duration: 6000,
                 ease: null
             }
         },
@@ -42,13 +44,11 @@
                 this.context.scale(this.factor, this.factor);
 
                 this.context.fillStyle = "rgba(0, 0, 0, 0.5)";
-                this.context.strokeStyle = '#FF8000';
                 this.context.lineWidth = 2;
+                this.context.globalCompositeOperation = "source-over";
+                this.ease = d3EaseLinear;
             },
             animationInit() {
-                this.context.globalCompositeOperation = "source-over";
-
-                this.ease = d3EaseCubic;
 
                 let timer = d3Timer((elapsed) => {
                     const t = Math.min(1, this.ease(elapsed / this.duration));
@@ -67,11 +67,11 @@
                 })
             },
             drawPoints() {
-                this.context.fillStyle = 'rgba(255,255,255,.1)';
+                this.context.fillStyle = 'rgba(255,255,255,.05)';
                 this.context.fillRect(0, 0, this.width, this.height);
                 
                 this.data.forEach((point) => {
-                    this.context.fillStyle = '#FF8000';
+                    this.context.fillStyle = '#FF0000';
                     this.context.fillRect(point.x, point.y, this.pointsWidth, this.pointsWidth);
                 })
             },
@@ -94,7 +94,7 @@
         },
         mounted() {
             this.init();
-            this.animationInit();
+            d3Interval(this.animationInit, 500)
         }
     }
 </script>

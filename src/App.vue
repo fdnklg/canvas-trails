@@ -42,10 +42,9 @@
 		},
 	},
 	methods: {
-		gridLayout(points, pointsWidth, gridWidth, gridHeight) {
+		gridLayout(points, pointsWidth, gridWidth) {
 			const pointsHeight = pointsWidth;
 			const pointsPerRow = Math.floor(gridWidth/pointsWidth);
-			const numRows = points.length / pointsPerRow;
 
 			points.forEach((point, i) => {
 				point.x = pointsWidth * (i % pointsPerRow);
@@ -60,7 +59,7 @@
 
 			let arr = [];
 
-			d3Range(numNetworks).forEach((index) => {
+			d3Range(numNetworks).forEach(() => {
 				let randomPointStart = this.randomPoint(points);
 				let randomNetworkSize = Math.floor(networkSize * Math.random());
 

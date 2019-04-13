@@ -46,10 +46,6 @@
                 this.context.lineWidth = 2;
             },
             animationInit() {
-                for (var i = 0; i < this.data.length; i++) {
-                    this.age.push(this.randomAge());
-                };
-
                 this.context.globalCompositeOperation = "source-over";
 
                 this.ease = d3EaseCubic;
@@ -57,7 +53,7 @@
                 let timer = d3Timer((elapsed) => {
                     const t = Math.min(1, this.ease(elapsed / this.duration));
 
-                    this.data.forEach((point,i) => {
+                    this.data.forEach((point) => {
                         point.x = point.startX * (1 - t) + point.endX * t;
                         point.y = point.startY * (1 - t) + point.endY * t;
                     });
@@ -74,7 +70,7 @@
                 this.context.fillStyle = 'rgba(255,255,255,.1)';
                 this.context.fillRect(0, 0, this.width, this.height);
                 
-                this.data.forEach((point,i) => {
+                this.data.forEach((point) => {
                     this.context.fillStyle = '#FF8000';
                     this.context.fillRect(point.x, point.y, this.pointsWidth, this.pointsWidth);
                 })
@@ -94,9 +90,6 @@
                 })
 
 
-            },
-            randomAge() {
-                return Math.round(Math.random() * 100);
             }
         },
         mounted() {

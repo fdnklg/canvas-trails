@@ -1,4 +1,6 @@
-# p-vector-flows
+# canvas trails
+
+A playground for canvas experiments
 
 ## Project setup
 ```
@@ -19,11 +21,3 @@ npm run build
 ```
 npm run test
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

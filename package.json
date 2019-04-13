@@ -1,5 +1,5 @@
 {
-  "name": "p-vector-flows",
+  "name": "p-canvas-trails",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "d3": "^5.9.2",
     "vue": "^2.6.6",
     "vuex": "^3.0.1"
   },

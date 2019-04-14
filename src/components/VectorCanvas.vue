@@ -1,5 +1,5 @@
 <template>
-    <div ref="vis" id="vis" class="vis-wrapper"></div>
+    <canvas id="vis"></canvas>
 </template>
 
 <script>
@@ -7,9 +7,9 @@
         select as d3Select,
         timer as d3Timer,
         interval as d3Interval,
-        easeCubic as d3EaseCubic,
         easeLinear as d3EaseLinear,
     } from 'd3';
+    
     export default {
         name: 'VectorCanvas',
         props: ['data', 'config', 'factor'],
@@ -30,7 +30,7 @@
         },
         methods: {
             init() {
-                this.canvas = d3Select('#vis').append('canvas')
+                this.canvas = d3Select('#vis')
                     .classed('vis-canvas', true)
                     .attr('width', this.width * this.factor)
                     .attr('height', this.height * this.factor)
@@ -43,13 +43,12 @@
                 this.context.clearRect(0, 0, this.width, this.height);
                 this.context.scale(this.factor, this.factor);
 
-                this.context.fillStyle = "rgba(0, 0, 0, 0.5)";
+                this.context.fillStyle = "rgba(0, 0, 0, 0.2)";
                 this.context.lineWidth = 2;
                 this.context.globalCompositeOperation = "source-over";
                 this.ease = d3EaseLinear;
             },
-            animationInit() {
-
+            animate() {
                 let timer = d3Timer((elapsed) => {
                     const t = Math.min(1, this.ease(elapsed / this.duration));
 
@@ -88,21 +87,31 @@
                         this.age[i] = this.randomAge();
                     }
                 })
+            },
+            drawText(data) {
+                this.context.font = "30px Comic Sans MS";
+                this.context.fillStyle = "red";
+                this.context.textAlign = "center";
 
+                let posTempX = null;
+                let nameTemp = null;
 
+                this.data.forEach(point => {
+                    if (posTempX != point.startX && nameTemp != point.name) {
+                        this.context.fillText(point.name, point.startX, point.startY); 
+                        posTempX = point.startX;
+                        nameTemp = point.name;
+                    }
+                });
             }
         },
         mounted() {
             this.init();
-            d3Interval(this.animationInit, 500)
+            d3Interval(this.animate, 500);
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .vis-wrapper {
-        width: 100%;
-        height: 100%;
-    }
 </style>
 

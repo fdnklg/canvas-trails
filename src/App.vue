@@ -1,11 +1,16 @@
 <template>
-  <div id="app">
-    <VectorCanvas :data="randomData" :config="config" :factor="isRetina"/>
-  </div>
+	<div id="app">
+		<div class="vis-wrapper">
+			<SvgText :data="randomData" :width="config.width" :height="config.height"/>
+			<VectorCanvas :data="randomData" :config="config" :factor="isRetina"/>
+		</div>
+	</div>
 </template>
 
 <script>
 	import VectorCanvas from './components/VectorCanvas.vue';
+	import SvgText from './components/SvgText.vue';
+
 	import { range as d3Range } from 'd3';
 
 	const conf = {
@@ -18,7 +23,8 @@
 	export default {
 	name: 'app',
 	components: {
-		VectorCanvas
+		VectorCanvas,
+		SvgText
 	},
 	computed: {
 		isRetina() {
@@ -32,7 +38,8 @@
 			d3Range(1000).forEach((index) => {
 				arr.push({
 					value: Math.random(),
-					index: index 
+					index: index,
+					name: `item ${index}`
 				})
 			});
 
@@ -59,7 +66,7 @@
 
 			let arr = [];
 
-			d3Range(numNetworks).forEach(() => {
+			d3Range(numNetworks).forEach((i) => {
 				let randomPointStart = this.randomPoint(points);
 				let randomNetworkSize = Math.floor(networkSize * Math.random());
 
@@ -71,6 +78,9 @@
 						startY: randomPointStart.y,
 						endX: randomPointEnd.x,
 						endY: randomPointEnd.y,
+						value: Math.random(),
+						index: i,
+						name: `item ${i}`
 					});
 				}
 			});
@@ -88,11 +98,19 @@
 </script>
 
 <style lang="scss">
+	@import "./style/_main.scss";
 	#app {
+		font-family: 'iA Writer Quattro';
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		top: 0;
 		left: 0;
+	}
+
+	.vis-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
 	}
 </style>

@@ -44,7 +44,7 @@
                 this.context.scale(this.factor, this.factor);
 
                 this.context.fillStyle = "rgba(0, 0, 0, 0.2)";
-                this.context.lineWidth = 2;
+                this.context.lineWidth = 1;
                 this.context.globalCompositeOperation = "source-over";
                 this.ease = d3EaseLinear;
             },
@@ -107,7 +107,7 @@
         },
         mounted() {
             this.init();
-            d3Interval(this.animate, 500);
+            d3Interval(this.animate, 1000);
         }
     }
 </script>

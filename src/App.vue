@@ -16,7 +16,7 @@
 	const conf = {
 		'width': 900,
 		'height': 900,
-		'pointsWidth': 2,
+		'pointsWidth': 1.5,
 		'pointsMargin': 25,
 	}
 
@@ -43,6 +43,7 @@
 				})
 			});
 
+
 			const arrPos = this.gridLayout(arr, conf.pointsWidth + conf.pointsMargin, conf.width, conf.height);
 			const arrNetwork = this.networks(arrPos);
 			return arrNetwork;
@@ -61,8 +62,8 @@
 			return points;
 		},
 		networks(points) {
-			const numNetworks = 5;
-			const networkSize = 20;
+			const numNetworks = 1;
+			const networkSize = 100;
 
 			let arr = [];
 
@@ -91,8 +92,6 @@
 			const randomIndex = Math.floor(arr.length * Math.random());
 			return arr[randomIndex];
 		}
-	},
-	mounted() {
 	}
 	}
 </script>

@@ -25,7 +25,6 @@
                     if (i == 0) {
                         return point;
                     } else if (i > 0 && point.startX != this.data[i - 1].startX) {
-                        console.log(point);
                         return point;
                     }
                 });
